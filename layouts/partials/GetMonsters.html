@@ -2,24 +2,24 @@
 {{ $s := newScratch }}
 {{ $s.Set "data" dict }}
 
-
+{{ $monsters := slice }}
 {{ with site.Data.monsters }}
   {{ range $entry := . }}
     {{ $svg := partialCached "GetMonsterSVG" .id .id }}
     {{ with $svg }}
       {{ with $entry }}
         {{ $monster := dict
-          "id" .id 
+          "id" (urlize .name) 
           "name" .name
           "league" .league
           "spotted" .spotted
           "svg" $svg
         }}
-        {{ $s.SetInMap "data" (urlize .name) $monster }}
+        {{ $monsters = $monsters | append $monster }}
       {{ end }}
     {{ end }}
 
   {{ end }}
 {{ end }}
 
-{{ return $s.Get "data" }}
+{{ return $monsters }}

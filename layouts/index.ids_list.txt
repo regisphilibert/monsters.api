@@ -1,0 +1,7 @@
+---
+title: Monsters
+monsters:
+{{- range $index, $value := partialCached "GetMonsters" "GetMonsters" }}
+- {{ $index }}
+{{- end }}
+---

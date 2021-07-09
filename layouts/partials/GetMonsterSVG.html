@@ -1,0 +1,10 @@
+{{ $svg := "" }}
+{{ with site.Data.monsters_svgs.results }}
+  {{ with where . "id" $ }}
+    {{ with index . 0 }}
+      {{ $svg = .svgContent | safeHTML }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return $svg }}

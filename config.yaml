@@ -1,0 +1,11 @@
+baseURL: http://example.org/
+languageCode: en-us
+title: My New Hugo Site
+outputs:
+  home:
+    - JSON
+    - ids_list
+outputFormats:
+  ids_list:
+    baseName: ids
+    mediatype: text/plain

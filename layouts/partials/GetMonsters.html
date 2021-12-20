@@ -3,14 +3,26 @@
 {{ $s.Set "data" dict }}
 
 {{ $monsters := slice }}
+{{ $titles := dict 
+  "1" "First"
+  "2" "Second"
+  "3" "Third"
+  "4" "Fourth"
+  "5" "Fifth"
+  "6" "Sixth"
+  "7" "Seventh"
+  "8" "Eighth"
+  "9" "Ninth"
+}}
+{{ range $round := seq 1 9 }}
 {{ with site.Data.monsters }}
   {{ range $entry := . }}
     {{ $svg := partialCached "GetMonsterSVG" .id .id }}
     {{ with $svg }}
       {{ with $entry }}
         {{ $monster := dict
-          "id" (urlize .name) 
-          "name" .name
+          "id" (print (urlize .name) "-" (string $round))
+          "title" (printf "%s the %s" .name (index $titles (string $round)))
           "league" .league
           "spotted" .spotted
           "svg" $svg
@@ -18,8 +30,9 @@
         {{ $monsters = $monsters | append $monster }}
       {{ end }}
     {{ end }}
-
   {{ end }}
 {{ end }}
+{{ end }}
+
 
 {{ return $monsters }}

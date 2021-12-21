@@ -26,6 +26,7 @@
           "league" .league
           "spotted" .spotted
           "svg" $svg
+          "generation" $round
         }}
         {{ $url := printf "http://asdfast.beobit.net/api/?length=3&v=%s" $entry.id }}
         {{ with resources.GetRemote $url }}

@@ -27,6 +27,15 @@
           "spotted" .spotted
           "svg" $svg
         }}
+        {{ $url := printf "http://asdfast.beobit.net/api/?length=3&v=%s" $entry.id }}
+        {{ with resources.GetRemote $url }}
+          
+          {{ with .Content | unmarshal }}
+            {{ with .text }}
+              {{ $monster = merge $monster (dict "content" .) }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
         {{ $monsters = $monsters | append $monster }}
       {{ end }}
     {{ end }}

@@ -14,7 +14,7 @@
   "8" "Eighth"
   "9" "Ninth"
 }}
-{{ range $round := seq 1 9 }}
+{{ range $round := seq 1 8 }}
 {{ with site.Data.monsters }}
   {{ range $entry := . }}
     {{ $svg := partialCached "GetMonsterSVG" .id .id }}

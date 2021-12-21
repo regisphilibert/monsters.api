@@ -1,0 +1,4 @@
+# a path:
+/index.json
+  # headers for that path:
+  Content-Type: application/json

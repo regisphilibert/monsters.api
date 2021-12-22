@@ -1,0 +1,14 @@
+{{ $img := "" }}
+{{ if true }}
+{{ with resources.GetRemote (printf "https://app.pixelencounter.com/api/basic/monsters/%d/png?size=500" (int $)) }}
+  {{ with .Err }}
+    {{ warnf "%#v" . }}
+  {{ else }}
+    {{ $img = .Permalink }}
+  {{ end }}
+
+{{ end }}
+{{ end }}
+
+
+{{ return $img }}

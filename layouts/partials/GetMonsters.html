@@ -19,29 +19,24 @@
 {{ range $round := seq 1 $generations }}
 {{ with site.Data.monsters }}
   {{ range $entry := . }}
-    {{ $svg := partialCached "GetMonsterSVG" .id .id }}
-    {{ with $svg }}
-      {{ with $entry }}
-        {{ $monster := dict
-          "id" (print (urlize .name) "-" (string $round))
-          "title" (printf "%s the %s" .name (index $titles (string $round)))
-          "league" .league
-          "spotted" .spotted
-          "svg" $svg
-          "generation" $round
-        }}
-        {{ $url := printf "http://asdfast.beobit.net/api/?length=2&v=%s" $entry.id }}
-        {{ with resources.GetRemote $url }}
-          
-          {{ with .Content | unmarshal }}
-            {{ with .text }}
-              {{ $monster = merge $monster (dict "content" .) }}
-            {{ end }}
-          {{ end }}
+    {{ $monster := dict
+      "id" (print (urlize .name) "-" (string $round))
+      "title" (printf "%s the %s" .name (index $titles (string $round)))
+      "league" .league
+      "spotted" .spotted
+      "img" (partialCached "GetMonsterPNG" .id .id)
+      "generation" $round
+    }}
+    {{ $url := printf "http://asdfast.beobit.net/api/?length=2&v=%s" $entry.id }}
+    {{ with resources.GetRemote $url }}
+      
+      {{ with .Content | unmarshal }}
+        {{ with .text }}
+          {{ $monster = merge $monster (dict "content" .) }}
         {{ end }}
-        {{ $monsters = $monsters | append $monster }}
       {{ end }}
     {{ end }}
+    {{ $monsters = $monsters | append $monster }}
   {{ end }}
 {{ end }}
 {{ end }}

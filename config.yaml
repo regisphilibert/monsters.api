@@ -5,6 +5,9 @@ disableKinds:
 - sitemap
 taxonomies:
   generation: generations
+caches:
+  getresource:
+    maxAge: 24h
 outputs:
   home:
   - JSON

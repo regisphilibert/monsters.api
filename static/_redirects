@@ -1,1 +1,2 @@
 / /index.json 200
+/?generations=:number /generations/:number/index.json

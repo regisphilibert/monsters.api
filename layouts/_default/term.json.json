@@ -1,0 +1,2 @@
+{{- $generations := int .Title -}}
+{{ partialCached "GetMonsters" $generations $generations | jsonify }}

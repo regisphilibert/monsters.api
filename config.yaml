@@ -3,8 +3,10 @@ languageCode: en-us
 title: My New Hugo Site
 disableKinds:
 - sitemap
-- taxonomy
-- term
+taxonomies:
+  generation: generations
 outputs:
   home:
+  - JSON
+  term:
   - JSON

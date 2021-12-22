@@ -1,6 +1,4 @@
 {{ $monsters := slice }}
-{{ $s := newScratch }}
-{{ $s.Set "data" dict }}
 
 {{ $monsters := slice }}
 {{ $titles := dict 
@@ -14,7 +12,11 @@
   "8" "Eighth"
   "9" "Ninth"
 }}
-{{ range $round := seq 1 8 }}
+{{ $generations := 9 }}
+{{ if ne $ "all" }}
+  {{ $generations = . }}
+{{ end }}
+{{ range $round := seq 1 $generations }}
 {{ with site.Data.monsters }}
   {{ range $entry := . }}
     {{ $svg := partialCached "GetMonsterSVG" .id .id }}
@@ -28,7 +30,7 @@
           "svg" $svg
           "generation" $round
         }}
-        {{ $url := printf "http://asdfast.beobit.net/api/?length=3&v=%s" $entry.id }}
+        {{ $url := printf "http://asdfast.beobit.net/api/?length=2&v=%s" $entry.id }}
         {{ with resources.GetRemote $url }}
           
           {{ with .Content | unmarshal }}

@@ -19,3 +19,10 @@ command = "hugo --minify -e netlify -D -b $DEPLOY_PRIME_URL"
 
 [context.branch-deploy]
 command = "hugo --minify -e netlify -b $DEPLOY_URL"
+
+[dev]
+  publish = "public"
+  framework = "#custom"
+  command = "hugo serve"
+  port = 8888
+  targetPort = 1313

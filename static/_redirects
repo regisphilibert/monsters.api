@@ -1,2 +1,2 @@
-/ generations=:number /generations/:number/index.json 200
+/:section /:section/index.json 200
 / /index.json 200
